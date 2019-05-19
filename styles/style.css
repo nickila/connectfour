@@ -1,0 +1,75 @@
+body {
+    background-color: rgb(245, 243, 233);
+}
+
+#gameboard {
+    box-align: center;
+    margin: 0 auto;
+    margin-top: 120px;
+    background-color: rgb(105, 202, 226);
+    /* border: 6px rgb(0, 204, 255) solid; */
+    padding: 20px;
+    border-radius: 3px;
+}
+
+td {
+  
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 50%; 
+    height: 80px;
+    width: 80px;
+}
+
+th {
+    
+    background-color: rgba(255, 120, 120, 0.3);
+    border-radius: 50%; 
+    height: 80px;
+    width: 80px;
+}
+
+td:hover {
+    cursor: pointer;
+    /* background-color: rgb(255, 120, 120); */
+    
+}
+
+.black {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%; 
+    height: 80px;
+    width: 80px;
+}
+
+.black:hover {
+    cursor: pointer;
+    background-color: rgba(39, 64, 70, 0.6);
+
+}
+
+.col {
+    text-align: center;
+}
+
+#header {
+    color: black;
+}
+
+tr {
+    padding: 20px;
+}
+
+#message {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 5rem;
+    color: rgba(39, 64, 70, 0.6);
+}
+
+.bright-black {
+    background-color: rgb(97, 169, 187);
+    ;
+}
+
+.bright-red {
+    background-color: rgb(255, 193, 196);
+}

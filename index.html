@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <title>CONNECT FOUR</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <!-- <table id="coins">
+                    <tr id="header" class="columnLetters">
+                        <th class="black" col="A"></th>
+                        <th class="black" col="B"></th>
+                        <th class="black" col="C"></th>
+                        <th class="black" col="D"></th>
+                        <th class="black" col="E"></th>
+                        <th class="black" col="F"></th>
+                        <th class="black" col="G"></th>
+                    </tr>
+                </table> -->
+                <table id="gameboard">
+                    <tr>
+                        <td id="A6" class="aColumn" col="A" value="6"></td>
+                        <td id="B6" class="bColumn" col="B" value="13"></td>
+                        <td id="C6" class="cColumn" col="C" value="20"></td>
+                        <td id="D6" class="dColumn" col="D" value="27"></td>
+                        <td id="E6" class="eColumn" col="E" value="34"></td>
+                        <td id="F6" class="fColumn" col="F" value="41"></td>
+                        <td id="G6" class="gColumn" col="G" value="48"></td>
+                    </tr>
+                    <tr>
+                        <td id="A5" class="aColumn" col="A" value="5"></td>
+                        <td id="B5" class="bColumn" col="B" value="12"></td>
+                        <td id="C5" class="cColumn" col="C" value="19"></td>
+                        <td id="D5" class="dColumn" col="D" value="26"></td>
+                        <td id="E5" class="eColumn" col="E" value="33"></td>
+                        <td id="F5" class="fColumn" col="F" value="40"></td>
+                        <td id="G5" class="gColumn" col="G" value="47"></td>
+                    </tr>
+                    <tr>
+                        <td id="A4" class="aColumn" col="A" value="4"></td>
+                        <td id="B4" class="bColumn" col="B" value="11"></td>
+                        <td id="C4" class="cColumn" col="C" value="18"></td>
+                        <td id="D4" class="dColumn" col="D" value="25"></td>
+                        <td id="E4" class="eColumn" col="E" value="32"></td>
+                        <td id="F4" class="fColumn" col="F" value="39"></td>
+                        <td id="G4" class="gColumn" col="G" value="46"></td>
+                    </tr>
+                    <tr>
+                        <td id="A3" class="aColumn" col="A" value="3"></td>
+                        <td id="B3" class="bColumn" col="B" value="10"></td>
+                        <td id="C3" class="cColumn" col="C" value="17"></td>
+                        <td id="D3" class="dColumn" col="D" value="24"></td>
+                        <td id="E3" class="eColumn" col="E" value="31"></td>
+                        <td id="F3" class="fColumn" col="F" value="38"></td>
+                        <td id="G3" class="gColumn" col="G" value="45"></td>
+                    </tr>
+                    <tr>
+                        <td id="A2" class="aColumn" col="A" value="2"></td>
+                        <td id="B2" class="bColumn" col="B" value="9"></td>
+                        <td id="C2" class="cColumn" col="C" value="16"></td>
+                        <td id="D2" class="dColumn" col="D" value="23"></td>
+                        <td id="E2" class="eColumn" col="E" value="30"></td>
+                        <td id="F2" class="fColumn" col="F" value="37"></td>
+                        <td id="G2" class="gColumn" col="G" value="44"></td>
+                    </tr>
+                    <tr>
+                        <td id="A1" class="aColumn" col="A" value="1"></td>
+                        <td id="B1" class="bColumn" col="B" value="8"></td>
+                        <td id="C1" class="cColumn" col="C" value="15"></td>
+                        <td id="D1" class="dColumn" col="D" value="22"></td>
+                        <td id="E1" class="eColumn" col="E" value="29"></td>
+                        <td id="F1" class="fColumn" col="F" value="36"></td>
+                        <td id="G1" class="gColumn" col="G" value="43"></td>
+                    </tr>
+                </table>
+                <div id="message"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/app.js"></script>
+</body>
+
+</html>
