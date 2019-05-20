@@ -17,23 +17,45 @@ $(document).ready(function () {
 
     count = 1;
     // var num = 9;
-    var dropArr = [];
-    var index = 0;
-    var diff = (num + 7) - ((num + 7) % 7);
-    //console.log(diff)
-    for (i = diff - 1; i > num - 1; i--) {
-        dropArr.push(i)
-    }
-    var interval = setInterval(function () {
-        console.log(dropArr[index++]);
-        if (index === dropArr.length) {
-            clearInterval(interval)
+    function countdown(num) {
+        var dropArr = [];
+        var index = 0;
+        var diff = (num + 7) - ((num + 7) % 7);
+        //console.log(diff)
+        for (i = diff - 1; i > num - 1; i--) {
+            dropArr.push(i)
         }
-    }, 500)
+        var interval = setInterval(function () {
+            console.log(dropArr[index++]);
+            if (index === dropArr.length) {
+                clearInterval(interval)
+            }
+        }, 50)
+    }
 
 
     function drop(columnLetter, rowNumber) {
-        countdown(rowNumber)
+        var num = rowNumber;
+        var dropArr = [];
+        var index = 0;
+        var diff = (num + 7) - ((num + 7) % 7);
+        //console.log(diff)
+        for (i = diff - 1; i > num - 1; i--) {
+            dropArr.push(i)
+        }
+
+        var interval = setInterval(function () {
+            $("#" + columnLetter + (dropArr[index++])).addClass("animate-black");
+            $("#" + columnLetter + (dropArr[index])).removeClass("animate-black");
+
+
+            //console.log(dropArr[index++]);
+            if (index === dropArr.length) {
+                clearInterval(interval)
+            }
+        }, 20)
+
+        //countdown(rowNumber)
         // setTimeout(function () {
         // for (i = rowNumber; i < 6; i++) {
         //     $("#" + columnLetter + i).css("backgroundColor", player);
