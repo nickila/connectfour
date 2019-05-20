@@ -13,28 +13,12 @@ $(document).ready(function () {
     var rowF = 1;
     var rowG = 1;
     var consecNums;
-
-
     count = 1;
-    // var num = 9;
-    function countdown(num) {
-        var dropArr = [];
-        var index = 0;
-        var diff = (num + 7) - ((num + 7) % 7);
-        //console.log(diff)
-        for (i = diff - 1; i > num - 1; i--) {
-            dropArr.push(i)
-        }
-        var interval = setInterval(function () {
-            console.log(dropArr[index++]);
-            if (index === dropArr.length) {
-                clearInterval(interval)
-            }
-        }, 50)
-    }
 
 
     function drop(columnLetter, rowNumber) {
+        $('td').removeClass('animate-red');
+        $('td').removeClass('animate-black');
         var num = rowNumber;
         var dropArr = [];
         var index = 0;
@@ -43,25 +27,33 @@ $(document).ready(function () {
         for (i = diff - 1; i > num - 1; i--) {
             dropArr.push(i)
         }
+        if (player === black) {
+            var intervalBlack = setInterval(function () {
+                $("#" + columnLetter + (dropArr[index++])).removeClass('animate-red').addClass("animate-black");
+                if (index === dropArr.length) {
+                    clearInterval(intervalBlack)
+                    $("#" + columnLetter + rowNumber).css("backgroundColor", black);
 
-        var interval = setInterval(function () {
-            $("#" + columnLetter + (dropArr[index++])).addClass("animate-black");
-            $("#" + columnLetter + (dropArr[index])).removeClass("animate-black");
+                }
+            }, 25)
+
+        }
+        if (player === red) {
+            var intervalRed = setInterval(function () {
+                $("#" + columnLetter + (dropArr[index++])).removeClass("animate-black").addClass("animate-red");
+                if (index === dropArr.length) {
+                    clearInterval(intervalRed)
+                    $("#" + columnLetter + rowNumber).css("backgroundColor", red);
+
+                }
+            }, 25)
+
+            // setTimeout(function () {
+            //     $("#" + columnLetter + rowNumber).css("backgroundColor", 'red');
+            // }, 0);
+        }
 
 
-            //console.log(dropArr[index++]);
-            if (index === dropArr.length) {
-                clearInterval(interval)
-            }
-        }, 20)
-
-        //countdown(rowNumber)
-        // setTimeout(function () {
-        // for (i = rowNumber; i < 6; i++) {
-        //     $("#" + columnLetter + i).css("backgroundColor", player);
-        // }
-        $("#" + columnLetter + rowNumber).css("backgroundColor", player);
-        // }, 1000);
         usedArr.push(parseInt($("#" + columnLetter + rowNumber).attr("value")));
         if (player === black) {
             blackArr.push(parseInt($("#" + columnLetter + rowNumber).attr("value")))
@@ -119,6 +111,7 @@ $(document).ready(function () {
     var colLetter;
 
     $('td').mouseover(function () {
+        console.log(colLetter)
         colLetter = $(this).attr('class');
         $('.' + colLetter).addClass('bright');
         if (player === red) {
@@ -172,6 +165,7 @@ $(document).ready(function () {
                 rowG++;
                 break;
         }
+
         player === black ? player = red : player = black;
     })
 
