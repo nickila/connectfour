@@ -17,8 +17,7 @@ $(document).ready(function () {
 
 
     function drop(columnLetter, rowNumber) {
-        $('td').removeClass('animate-red');
-        $('td').removeClass('animate-black');
+
         var num = rowNumber;
         var dropArr = [];
         var index = 0;
@@ -33,7 +32,7 @@ $(document).ready(function () {
                 if (index === dropArr.length) {
                     clearInterval(intervalBlack)
                     $("#" + columnLetter + rowNumber).css("backgroundColor", black);
-
+                    $('td').removeClass('animate-red animate-black');
                 }
             }, 25)
 
@@ -44,13 +43,9 @@ $(document).ready(function () {
                 if (index === dropArr.length) {
                     clearInterval(intervalRed)
                     $("#" + columnLetter + rowNumber).css("backgroundColor", red);
-
+                    $('td').removeClass('animate-red animate-black');
                 }
             }, 25)
-
-            // setTimeout(function () {
-            //     $("#" + columnLetter + rowNumber).css("backgroundColor", 'red');
-            // }, 0);
         }
 
 
@@ -167,6 +162,7 @@ $(document).ready(function () {
         }
 
         player === black ? player = red : player = black;
+
     })
 
     function checkHorizontal(arr) {
@@ -208,6 +204,7 @@ $(document).ready(function () {
         }
     }
 })
+
 
 // If player clicks a column it will color the bottom row of that column
 // How do I determine if all td in one column are the same color
