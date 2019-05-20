@@ -5,11 +5,15 @@ body {
 #gameboard {
     box-align: center;
     margin: 0 auto;
-    margin-top: 120px;
+    margin-top: 20px;
     background-color: rgb(105, 202, 226);
     /* border: 6px rgb(0, 204, 255) solid; */
     padding: 20px;
     border-radius: 3px;
+}
+
+#coins {
+    margin: 0 auto;
 }
 
 td {
@@ -20,40 +24,23 @@ td {
     width: 80px;
 }
 
-th {
-    
-    background-color: rgba(255, 120, 120, 0.3);
-    border-radius: 50%; 
-    height: 80px;
-    width: 80px;
-}
-
 td:hover {
     cursor: pointer;
-    /* background-color: rgb(255, 120, 120); */
-    
 }
 
-.black {
-    background-color: rgba(0, 0, 0, 0.05);
+th {
+    background-color: transparent;
     border-radius: 50%; 
     height: 80px;
     width: 80px;
 }
 
-.black:hover {
-    cursor: pointer;
-    background-color: rgba(39, 64, 70, 0.6);
 
-}
 
 .col {
     text-align: center;
 }
 
-#header {
-    color: black;
-}
 
 tr {
     padding: 20px;
@@ -65,11 +52,15 @@ tr {
     color: rgba(39, 64, 70, 0.6);
 }
 
-.bright-black {
-    background-color: rgb(97, 169, 187);
-    ;
+.bright {
+    background-color: rgba(255, 255, 255, 0.5);
+    
 }
 
-.bright-red {
-    background-color: rgb(255, 193, 196);
+.black {
+    background-color: rgba(8, 70, 85, 0.8);
+}
+
+.red {
+    background-color: rgba(255, 0, 0, 0.5);
 }

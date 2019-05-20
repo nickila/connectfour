@@ -16,12 +16,33 @@ $(document).ready(function () {
 
 
     count = 1;
+    // var num = 9;
+    var dropArr = [];
+    var index = 0;
+    var diff = (num + 7) - ((num + 7) % 7);
+    //console.log(diff)
+    for (i = diff - 1; i > num - 1; i--) {
+        dropArr.push(i)
+    }
+    var interval = setInterval(function () {
+        console.log(dropArr[index++]);
+        if (index === dropArr.length) {
+            clearInterval(interval)
+        }
+    }, 500)
 
-    function drop(columnLetter, rowLetter) {
-        $("#" + columnLetter + rowLetter).css("backgroundColor", player);
-        usedArr.push(parseInt($("#" + columnLetter + rowLetter).attr("value")));
+
+    function drop(columnLetter, rowNumber) {
+        countdown(rowNumber)
+        // setTimeout(function () {
+        // for (i = rowNumber; i < 6; i++) {
+        //     $("#" + columnLetter + i).css("backgroundColor", player);
+        // }
+        $("#" + columnLetter + rowNumber).css("backgroundColor", player);
+        // }, 1000);
+        usedArr.push(parseInt($("#" + columnLetter + rowNumber).attr("value")));
         if (player === black) {
-            blackArr.push(parseInt($("#" + columnLetter + rowLetter).attr("value")))
+            blackArr.push(parseInt($("#" + columnLetter + rowNumber).attr("value")))
             checkHorizontal(blackArr);
             if (consecNums === 4) {
                 $("#message").html("BLACK WINS")
@@ -45,7 +66,7 @@ $(document).ready(function () {
             return;
         }
         else if (player === red) {
-            redArr.push(parseInt($("#" + columnLetter + rowLetter).attr("value")))
+            redArr.push(parseInt($("#" + columnLetter + rowNumber).attr("value")))
             checkHorizontal(redArr);
             if (consecNums === 4) {
                 $("#message").html("RED WINS")
@@ -76,24 +97,26 @@ $(document).ready(function () {
     var colLetter;
 
     $('td').mouseover(function () {
+        colLetter = $(this).attr('class');
+        $('.' + colLetter).addClass('bright');
         if (player === red) {
-            console.log('red')
-            colLetter = $(this).attr('class');
-            $('.' + colLetter).addClass('bright-red');
+            $('#' + colLetter).addClass('red');
         } else if (player === black) {
-            console.log('black')
-            colLetter = $(this).attr('class');
-            $('.' + colLetter).addClass('bright-black');
+            $('#' + colLetter).addClass('black')
         }
-
     });
     $('td').mouseout(function () {
-        $('.' + colLetter).removeClass('bright-red');
-        $('.' + colLetter).removeClass('bright-black');
+        $('.' + colLetter).removeClass('bright');
+        $('#' + colLetter).removeClass('black');
+        $('#' + colLetter).removeClass('red');
+
+
     })
     $('td').click(function () {
-        $('.' + colLetter).addClass('bright-red');
-        $('.' + colLetter).addClass('bright-black');
+        $('.' + colLetter).addClass('bright');
+        $('#' + colLetter).removeClass('black');
+        $('#' + colLetter).removeClass('red');
+
     })
     $("td").click(function () {
         var col = $(this).attr('col');
@@ -128,12 +151,6 @@ $(document).ready(function () {
                 break;
         }
         player === black ? player = red : player = black;
-        // $("th").css("backgroundColor", player);
-        if (player === black) {
-            $('th').addClass('black')
-        } else if (player === red) {
-            $('th').removeClass('black')
-        }
     })
 
     function checkHorizontal(arr) {
