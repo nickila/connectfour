@@ -12,17 +12,26 @@ $(document).ready(function () {
     var rowE = 1;
     var rowF = 1;
     var rowG = 1;
-    var consecNums;
-    count = 1;
+    var consecNums = false;
+    var gameover = false;
+    var redScore = 0;
+    var blackScore = 0;
+
+    $("#black-score").html(blackScore);
+    $("#red-score").html(redScore);
 
 
+    $("#new-game").click(function () {
+        $("td").removeClass("black-square red-square");
+        gameover = false;
+        console.log(gameover)
+        player = black
+    })
     function drop(columnLetter, rowNumber) {
-
         var num = rowNumber;
         var dropArr = [];
         var index = 0;
         var diff = (num + 7) - ((num + 7) % 7);
-        //console.log(diff)
         for (i = diff - 1; i > num - 1; i--) {
             dropArr.push(i)
         }
@@ -31,134 +40,154 @@ $(document).ready(function () {
                 $("#" + columnLetter + (dropArr[index++])).removeClass('animate-red').addClass("animate-black");
                 if (index === dropArr.length) {
                     clearInterval(intervalBlack)
-                    $("#" + columnLetter + rowNumber).css("backgroundColor", black);
+                    $("#" + columnLetter + rowNumber).addClass("black-square");
                     $('td').removeClass('animate-red animate-black');
+                    usedArr.push(parseInt($("#" + columnLetter + rowNumber).attr("value")));
+                    blackArr.push(parseInt($("#" + columnLetter + rowNumber).attr("value")))
+                    setInterval(function () {
+                        checkHorizontal(blackArr);
+                        if (consecNums) {
+                            $("#message").html("BLACK WINS");
+                            gameover = true;
+                            blackScore++
+                            return;
+                        }
+                        checkVertical(blackArr);
+                        if (consecNums) {
+                            $("#message").html("BLACK WINS");
+                            gameover = true;
+                            blackScore++
+                            return;
+                        }
+                        checkDiagonalL(blackArr);
+                        if (consecNums) {
+                            $("#message").html("BLACK WINS");
+                            gameover = true;
+                            blackScore++
+                            return;
+                        }
+                        checkDiagonalR(blackArr);
+                        if (consecNums) {
+                            $("#message").html("BLACK WINS");
+                            gameover = true;
+                            blackScore++
+                            return;
+                        }
+                    }, 700)
+                    return;
                 }
             }, 25)
-
         }
         if (player === red) {
             var intervalRed = setInterval(function () {
                 $("#" + columnLetter + (dropArr[index++])).removeClass("animate-black").addClass("animate-red");
                 if (index === dropArr.length) {
                     clearInterval(intervalRed)
-                    $("#" + columnLetter + rowNumber).css("backgroundColor", red);
+                    $("#" + columnLetter + rowNumber).addClass("red-square");
                     $('td').removeClass('animate-red animate-black');
+                    redArr.push(parseInt($("#" + columnLetter + rowNumber).attr("value")))
+                    setInterval(function () {
+                        checkHorizontal(redArr);
+                        if (consecNums) {
+                            $("#message").html("RED WINS");
+                            gameover = true;
+                            redScore++;
+                            return;
+                        }
+                        checkVertical(redArr);
+                        if (consecNums) {
+                            $("#message").html("RED WINS");
+                            gameover = true;
+                            redScore++;
+                            return;
+                        }
+                        checkDiagonalL(redArr);
+                        if (consecNums) {
+                            $("#message").html("RED WINS");
+                            gameover = true;
+                            redScore++;
+                            return;
+                        }
+                        checkDiagonalR(redArr);
+                        if (consecNums) {
+                            $("#message").html("RED WINS");
+                            gameover = true;
+                            redScore++;
+                            return;
+                        }
+                    }, 700)
+                    return;
                 }
             }, 25)
-        }
-
-
-        usedArr.push(parseInt($("#" + columnLetter + rowNumber).attr("value")));
-        if (player === black) {
-            blackArr.push(parseInt($("#" + columnLetter + rowNumber).attr("value")))
-            checkHorizontal(blackArr);
-            if (consecNums === 4) {
-                $("#message").html("BLACK WINS")
-                return;
-            }
-            checkVertical(blackArr);
-            if (consecNums === 4) {
-                $("#message").html("BLACK WINS")
-                return;
-            }
-            checkDiagonalL(blackArr);
-            if (consecNums === 4) {
-                $("#message").html("BLACK WINS")
-                return;
-            }
-            checkDiagonalR(blackArr);
-            if (consecNums === 4) {
-                $("#message").html("BLACK WINS")
-                return;
-            }
-            return;
-        }
-        else if (player === red) {
-            redArr.push(parseInt($("#" + columnLetter + rowNumber).attr("value")))
-            checkHorizontal(redArr);
-            if (consecNums === 4) {
-                $("#message").html("RED WINS")
-                return;
-            }
-
-            checkVertical(redArr);
-            if (consecNums === 4) {
-                $("#message").html("RED WINS")
-                return;
-            }
-
-            checkDiagonalL(redArr);
-            if (consecNums === 4) {
-                $("#message").html("RED WINS")
-                return;
-            }
-            checkDiagonalR(redArr);
-            if (consecNums === 4) {
-                $("#message").html("RED WINS")
-                return;
-            }
-
-
-            return;
         }
     }
     var colLetter;
 
     $('td').mouseover(function () {
-        console.log(colLetter)
-        colLetter = $(this).attr('class');
-        $('.' + colLetter).addClass('bright');
-        if (player === red) {
-            $('#' + colLetter).addClass('red');
-        } else if (player === black) {
-            $('#' + colLetter).addClass('black')
+        if (gameover === false) {
+            console.log(colLetter)
+            colLetter = $(this).attr('class');
+            $('.' + colLetter).addClass('bright');
+            if (player === red) {
+                $('#' + colLetter).addClass('red');
+            } else if (player === black) {
+                $('#' + colLetter).addClass('black')
+            }
+        } else if (gameover) {
+            $('#' + colLetter).removeClass('red black');
+            $('td').removeClass('bright');
+
         }
     });
     $('td').mouseout(function () {
-        $('.' + colLetter).removeClass('bright');
-        $('#' + colLetter).removeClass('black');
-        $('#' + colLetter).removeClass('red');
+        if (gameover === false) {
+            $('.' + colLetter).removeClass('bright');
+            $('#' + colLetter).removeClass('black');
+            $('#' + colLetter).removeClass('red');
 
-
+        }
     })
     $('td').click(function () {
-        $('.' + colLetter).addClass('bright');
-        $('#' + colLetter).removeClass('black');
-        $('#' + colLetter).removeClass('red');
+        if (gameover === false) {
+            $('.' + colLetter).addClass('bright');
+            $('#' + colLetter).removeClass('black');
+            $('#' + colLetter).removeClass('red');
+        }
 
     })
     $("td").click(function () {
-        var col = $(this).attr('col');
-        switch (col) {
-            case 'A':
-                drop("A", rowA)
-                rowA++;
-                break;
-            case 'B':
-                drop("B", rowB)
-                rowB++;
-                break;
-            case 'C':
-                drop("C", rowC)
-                rowC++;
-                break;
-            case 'D':
-                drop("D", rowD)
-                rowD++;
-                break;
-            case 'E':
-                drop("E", rowE)
-                rowE++;
-                break;
-            case 'F':
-                drop("F", rowF)
-                rowF++;
-                break;
-            case 'G':
-                drop("G", rowG)
-                rowG++;
-                break;
+        if (gameover === false) {
+            var col = $(this).attr('col');
+            switch (col) {
+                case 'A':
+                    drop("A", rowA)
+                    rowA++;
+                    break;
+                case 'B':
+                    drop("B", rowB)
+                    rowB++;
+                    break;
+                case 'C':
+                    drop("C", rowC)
+                    rowC++;
+                    break;
+                case 'D':
+                    drop("D", rowD)
+                    rowD++;
+                    break;
+                case 'E':
+                    drop("E", rowE)
+                    rowE++;
+                    break;
+                case 'F':
+                    drop("F", rowF)
+                    rowF++;
+                    break;
+                case 'G':
+                    drop("G", rowG)
+                    rowG++;
+                    break;
+            }
         }
 
         player === black ? player = red : player = black;
@@ -166,43 +195,45 @@ $(document).ready(function () {
     })
 
     function checkHorizontal(arr) {
-        consecNums = 1;
+        consecNums = false;
         for (i = 0; i < arr.length; i++) {
             if (arr.includes(arr[i] + 7) && arr.includes(arr[i] + 14) && arr.includes(arr[i] + 21)) {
-                consecNums = 4;
+
+                consecNums = true;
             }
         }
     }
 
     function checkVertical(arr) {
         arr.sort(function (a, b) { return a - b });
-        consecNums = 1;
+        consecNums = false;
 
         for (i = 0; i < arr.length; i++) {
             if (arr.includes(arr[i] + 1) && arr.includes(arr[i] + 2) && arr.includes(arr[i] + 3)) {
-                consecNums = 4;
+                consecNums = true;
             }
         }
 
     }
 
     function checkDiagonalL(arr) {
-        consecNums = 1;
+        consecNums = false;
         for (i = 0; i < arr.length; i++) {
             if (arr.includes(arr[i] + 8) && arr.includes(arr[i] + 16) && arr.includes(arr[i] + 24)) {
-                consecNums = 4;
+                consecNums = true;
             }
         }
     }
 
     function checkDiagonalR(arr) {
-        consecNums = 1;
+        consecNums = false;
         for (i = 0; i < arr.length; i++) {
             if (arr.includes(arr[i] + 6) && arr.includes(arr[i] + 12) && arr.includes(arr[i] + 18)) {
-                consecNums = 4;
+                consecNums = true;
             }
         }
     }
+
 })
 
 

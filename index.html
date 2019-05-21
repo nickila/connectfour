@@ -12,7 +12,11 @@
     <div class="container">
         <div class="row">
             <div class="col">
-
+                <!-- <div id="title">
+                    <h1>CONNECT FOUR</h1>
+                </div> -->
+                <div id="new-game">NEW GAME</div>
+                <div id="gameover"></div>
                 <table id="coins">
                     <tr id="header" class="columnLetters">
                         <th id="aColumn" col="A"></th>
@@ -81,11 +85,14 @@
                     </tr>
                 </table>
                 <div id="message"></div>
+                <div class="score">BLACK: <span id="black-score"></span>
+                    <div class="score">RED: <span id="red-score"></span>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script src="scripts/app.js"></script>
+        <script src="scripts/app.js"></script>
 </body>
 
 </html>
